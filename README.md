@@ -1,2 +1,7 @@
 # TigerGame
-A card game between a player and computer
+
+simulates a card game in which the computer
+and a human player draw cards, with the goal of winning
+rounds and accumulating scores. The game can be played
+multiple times, and the results of each game are summarized
+at the end.
