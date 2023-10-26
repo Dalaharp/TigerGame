@@ -1,0 +1,206 @@
+In TigerGame, there are two types of cards: purple and orange. Each color has 10 cards ranked from 1 to 10, for a
+total of 20 cards in one deck (10 purple cards ranked 1-10 and 10 orange cards ranked 1-10).
+Each card has a value. The value of purple cards is equal to their rank (e.g., purple:2 is worth 2
+points); the value of orange cards is equal to twice their rank (e.g., orange:2 is worth 4 points).
+TigerGame is a computer game in which a player competes against the computer. The game is
+played as follows:
+• There are two players,
+computer and
+human.
+• Each player draws a hand of 5 cards from the full deck, which has been shuffled before
+cards are drawn.
+• There are five rounds. Each round is played as follows:
+1.
+Computer moves first by selecting a card from its hand. For simplicity, this is
+implemented as a random draw.
+Human sees the card
+computer has played.
+2.
+Human selects a card from their hand to play against the
+computer’s card.
+3. The player whose card has the larger value wins the round. Any card can be played
+against any other card. Only their value determines who wins the round.
+4. The player who wins the round is awarded points equal to the sum of the values of the
+two cards. For example, if
+computer plays purple:2 and
+human plays orange:4,
+human
+wins the round and receives 10 points.
+5. If there is a tie, no player receives points.
+• After five rounds, the player with the most points wins.
+
+Class Specifications
+
+Card
+Each card in TigerGame is represented as an object of class Card. This class has three private
+member variables: rank (a value between 1-10), color (either purple or orange), and value,
+which is calculated as explained above. Use in-class initialization to initialize rank to 0, color to
+purple, and value to 0. Note that color is an enumerated type of type Color, which is added as
+a public member to Card.
+Card has a parameterized constructor, which is used to create an instance of each card in
+TigerGame (e.g., an orange card with rank 2). This constructor should initialize rank and color
+with the arguments provided
+and set value to its correct value given rank and color.
+Card also has a function printCard() which must return a string in the following format:
+color:rank. For example, for an orange card of rank 4 , printCard() should return orange:4.
+The remaining three functions are getter functions to retrieve the values of the private member
+variables.
+Card
+- rank: int
+- color: Color
+- value: int
++ enum Color {purple, orange}
++ Card()
++ Card(rank: int, color: Color)
++ printCard(): string
++ getRank(): int
++ getColor(): Color
++ getValue(): int
+Deck
+A TigerGame consists of a deck of 20 cards: 10 purple cards ranked 1-10 and 10 orange cards
+ranked 1-10. The class Deck will represent this deck of cards.
+Deck has a single private variable deck, which is a vector of type Card. This vector holds all 20
+cards used in TigerGame.
+Deck has a default constructor. The purpose of the constructor is to
+create vector deck with all 20 cards when an object of Deck is instantiated. Once implemented,
+create the deck of cards for a TigerGame with Deck deckOfCards; at the beginning of
+the main program.
+2
+Deck has two member functions that allow manipulating the deck of cards in the game. Function
+shuffle() randomizes the order of the Card objects in vector deck. Once implemented, you can
+use deckOfCards.shuffle(); in the main program to shuffle the deck.
+Function drawCard() is used to draw a card from the deck. Implement drawCard() so that it
+returns the first card from the deck (its return type is card) and then removes that card from the
+deck.
+Function getDeckSize() returns the current number of cards in the deck.
+Deck
+- deck: vector of type Card
++ Deck()
++ shuffle(): void
++ drawCard(): Card
++ getDeckSize(): int
+.
+Hand
+Each player’s hand of cards is implemented as an object of class Hand in TigerGame. Hand has a
+single private variable hand, which is a vector of type Card. This vector holds all N cards a player
+draws from the deck.
+Hand has a parameterized constructor, which is used to deal a hand of cards from the deck.
+Implement this constructor so that it draws N cards from the deck when an instance of Hand is
+instantiated.
+Hand has three member functions, printHand, dealCard, and getHandSize. Use printHand() to
+show
+human their current hand. This function must return a string formatted as follows:
+[1] purple:5 [2] orange:7 [3] orange:2 [4] purple:10 [5] orange:9
+where the numbers in brackets represent the position of each card in the hand (i.e., in vector
+hand).
+The second member function in Hand is dealCard, which has a parameter num that represents
+the position of a card in the hand. Use this function to let
+human deal a card from their hand.
+When a card is dealt, it should be removed from hand. For the above example, dealCard(2)
+would deal card orange:7 and remove it from the hand.
+Function getHandSize() returns the current number of cards in the hand.
+Hand
+- hand: vector of type Card
++ Hand()
++ Hand(deck: Deck, N: int)
++ printHand(): string
+3
++ dealCard(num: int): Card
++ getHandSize(): int
+Player
+Each player,
+computer and
+human, will be represented by an object of class Player in
+TigerGame. This class has two public member variables: an object of type Hand and an integer
+score. Member hand is an object of class Hand because each player has a hand of cards. Use
+score to keep track of a player’s current score. Initialize this variable to 0 using in-class
+initialization.
+Player has a parameterized constructor, which is used to initialize hand. When called, this
+constructor will create an instance of Player with N cards in their hand. Note that this
+constructor is similar to the Hand constructor.
+Player
++ hand: Hand
++ score: int
++ Player()
++ Player(deck: Deck, N: int)
+Note: Class Player only needs a header file with in-line functions. The class is simple enough to
+implement everything in Player.h instead of using a separate .cpp file.
+Main Program
+Proceed asfollows to build the game:
+1. Create a deck of cards and shuffle it.
+2. Create two players, each one with 5 cards in their hand.
+3. Play five rounds. In each round:
+1. Have
+computer deal a card from their hand.
+2. Show
+human their hand of cards so that they can make a selection.
+3. Have
+human deal their card.
+4. Determine who won the round and update points accordingly.
+5. Print results for current round.
+4. Print final game results.
+Make sure to implement input validation where necessary. For example, when
+human only has
+3 cards left on their hand, selecting card number 4 should prompt the user to select a valid card.
+Sample Run
+Here is a sample run of TigerGames. Your implementation can look different. That means
+you can be creative in how you design your game, but you must follow the above class
+specifications, e.g. printCard() must return a string format as color:rank.
+4
+Welcome to TigerGame!
+The deck was shuffled and each player has drawn 5 cards.
+Round 1
+-------
+The computer plays: purple:10
+Your hand: [1] orange:8 [2] orange:1 [3] purple:3 [4] orange:5 [5] purple:8
+Which card do you want to play? 4
+You played: orange:5
+Tie!
+Current scores:
+Human: 0
+Computer: 0
+Round 2
+-------
+The computer plays: orange:6
+Your hand: [1] orange:8 [2] orange:1 [3] purple:3 [4] purple:8
+Which card do you want to play? 1
+You played: orange:8
+You win this round!
+Current scores:
+Human: 28
+Computer: 0
+Round 3
+-------
+The computer plays: orange:2
+Your hand: [1] orange:1 [2] purple:3 [3] purple:8
+Which card do you want to play? 3
+You played: purple:8
+You win this round!
+Current scores:
+Human: 40
+Computer: 0
+Round 4
+-------
+The computer plays: purple:5
+Your hand: [1] orange:1 [2] purple:3
+Which card do you want to play? 1
+You played: orange:1
+The computer wins this round!
+Current scores:
+Human: 40
+Computer: 7
+Round 5
+-------
+The computer plays: purple:7
+Your hand: [1] purple:3
+Which card do you want to play? 1
+You played: purple:3
+The computer wins this round!
+Current scores:
+Human: 40
+Computer: 17
+FINAL SCORE:
+Human: 40
+Computer: 17
+Human has won!
+5
